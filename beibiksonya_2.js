@@ -1,4 +1,4 @@
-function findIndex(arr) {
+function findEvenIndex(arr) {
   const n = arr.length;
 
   for (let i = 0; i < n; i++) {
@@ -13,5 +13,5 @@ function findIndex(arr) {
 }
 
 const arr = [5, 2, 3, 4, 5, 2, 3];
-const index = findIndex(arr);
+const index = findEvenIndex(arr);
 console.log("The index where left and right sums are equal is:", index);
