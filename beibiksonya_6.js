@@ -1,48 +1,32 @@
-function perimeter(grid) {
-  if (!grid || grid.length === 0) {
-    return 0;
-  }
-  const numRows = grid.length;
-  const numCols = grid[0].length;
-  let totalPerimeter = 0;
+function landPerimeter(grid) {
+  let perimeter = 0;
 
-  for (let i = 0; i < numRows; i++) {
-    for (let j = 0; j < numCols; j++) {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
       if (grid[i][j] === "X") {
-        totalPerimeter += cellPerimeter(i, j, grid);
+        perimeter += 4; // Each 'X' cell contributes 4 to the perimeter
+
+        // Check adjacent cells
+        if (i > 0 && grid[i - 1][j] === "X") {
+          perimeter -= 2; // Subtract 2 for each shared edge
+        }
+
+        if (j > 0 && grid[i][j - 1] === "X") {
+          perimeter -= 2;
+        }
       }
     }
   }
-  return totalPerimeter;
+
+  return `Total land perimeter: ${perimeter}`;
 }
 
-function cellPerimeter(row, col, grid) {
-  const directions = [
-    [-1, 0],
-    [1, 0],
-    [0, -1],
-    [0, 1],
-  ];
-  const numRows = grid.length;
-  const numCols = grid[0].length;
-  let thePerimeter = 0;
+// Example usage:
+const grid = [
+  ["X", "O", "X", "O", "X"],
+  ["O", "X", "O", "X", "O"],
+  ["X", "O", "X", "O", "X"],
+  ["O", "X", "O", "X", "O"],
+];
 
-  for (const [dx, dy] of directions) {
-    const newRow = row + dx;
-    const newCol = col + dy;
-    if (
-      newRow < 0 ||
-      newRow >= numRows ||
-      newCol < 0 ||
-      newCol >= numCols ||
-      grid[newRow][newCol] === "O"
-    ) {
-      thePerimeter++;
-    }
-  }
-  return thePerimeter;
-}
-
-const grid = ["XOXO", "XOOO", "OOXO", "XXXO", "OXOO"];
-const totalPerimeter = perimeter(grid);
-console.log("Total land perimeter:", totalPerimeter);
+console.log(landPerimeter(grid)); // Output: 'Total land perimeter: 18'
