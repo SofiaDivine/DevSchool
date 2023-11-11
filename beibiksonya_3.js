@@ -1,4 +1,4 @@
-function groups(words) {
+function groupAnagrams(words) {
   let anagramGroups = {};
 
   const sortCharacters = (word) => word.split("").sort().join("");
@@ -15,7 +15,7 @@ function groups(words) {
 }
 
 let input = ["tsar", "rat", "tar", "star", "tars", "cheese"];
-let output = groups(input);
+let output = groupAnagrams(input);
 output.forEach((group) => {
   console.log(`[${group.join(", ")}]`);
 });
