@@ -1,20 +1,22 @@
-function maxCombinedHonor(arr, d) {
+function largestRadialSum(arr, d) {
   const n = arr.length;
-  let maxHonor = 0;
+  let maxSum = -Infinity;
 
   for (let i = 0; i < n; i++) {
-    let currentHonor = 0;
+    let currentSum = 0;
 
     for (let j = 0; j < d; j++) {
-      const index = (i + j) % n;
-      currentHonor += arr[index];
+      const index = (i + j * (n / d)) % n;
+      currentSum += arr[index];
     }
-    maxHonor = Math.max(maxHonor, currentHonor);
+
+    maxSum = Math.max(maxSum, currentSum);
   }
-  return maxHonor;
+
+  return maxSum;
 }
 
-let honorArray = [1, 2, 3, 4, 5, 6];
-let dayOfMonth = 3;
-let combinedHonor = maxCombinedHonor(honorArray, dayOfMonth);
-console.log(`Combined honor of the ${dayOfMonth} leaders: ${combinedHonor}`);
+// Test cases
+console.log(largestRadialSum([1, 2, 3, 4], 2)); // Output: 6
+console.log(largestRadialSum([1, 5, 6, 3, 4, 2], 3)); // Output: 11
+console.log(largestRadialSum([1, 1, 0], 1)); // Output: 1
